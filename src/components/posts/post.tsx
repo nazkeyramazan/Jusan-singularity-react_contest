@@ -1,6 +1,7 @@
 import React, {useEffect, useState} from 'react'
+import { Link } from 'react-router-dom'
 
-interface Post {
+export interface Post {
     userId: number,
     id: number,
     title: string,
@@ -16,7 +17,7 @@ export const Post = () => {
     useEffect(()=>{
         const axios = require('axios');
         // @ts-ignore
-        axios.get<Post[]>('https://jsonplaceholder.typicode.com/posts')
+        axios.get<getPostsReq>('https://jsonplaceholder.typicode.com/posts')
             .then(function (response:getPostsReq) {
                 console.log(response.data);
                 setPosts(response.data)
@@ -26,16 +27,28 @@ export const Post = () => {
             })
 
     }, [])
+    const handleClickOpen = () =>{
+        console.log('open')
+    }
     // @ts-ignore
     return (
-        <div >
-            {posts.map((item:Post)=>(
-                <div>
-                    <p >{item.id} </p>
-                    <p >{item.title} </p>
-                    <p >{item.body} </p>
-                </div>
+        <>
+            <button
+                style={{display: 'flex', alignItems: 'center'}}
+                onClick={handleClickOpen}
+            >
+                <Link to="/new">Add new Post</Link>
+            </button>
+            <div>
+
+                {posts.map((item: Post) => (
+                    <div>
+                        <p>{item.id} </p>
+                        <p>{item.title} </p>
+                        <p>{item.body} </p>
+                    </div>
                 ))}
-        </div>
+            </div>
+        </>
         )
 }
