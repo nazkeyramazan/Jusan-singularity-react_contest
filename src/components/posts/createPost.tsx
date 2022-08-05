@@ -2,8 +2,8 @@ import React, {useState} from 'react'
 import {Post} from "./post";
 
 export const CreatePost = () => {
-    const [userId, setUserId] = useState<number>(5)
-    const [id, setId] = useState<number>(0)
+    const [userId, setUserId] = useState<number>()
+    const [id, setId] = useState<number>()
     const [title, setTitle] = useState<string>('')
     const [body, setBody] = useState<string>('')
     // const [newPost, setNewPost] = useState<Post>({
@@ -15,23 +15,24 @@ export const CreatePost = () => {
     const handleSubmit = (e:React.FormEvent<HTMLFormElement>) =>{
         console.log('new post is submitted')
         e.preventDefault();
+        console.log(
+            title, body, id, userId
+        )
     }
-    console.log(
-        title, body, id, userId
-    )
+
     return (
         <>
             <form onSubmit={(e)=>handleSubmit(e)}>
                 <div>
                     <label>
-                        title:
-                        <input type="number" name='userId' value={userId} onChange={(e)=>console.log(e.target.value)} />
+                        userId:
+                        <input type="number" name='userId' value={userId} onChange={(e)=>setUserId(Number(e.target.value))} />
                     </label>
                 </div>
                 <div>
                     <label>
-                        title:
-                        <input type="number" name='id' value={title} onChange={(e)=>console.log(e.target.value)} />
+                        id:
+                        <input type="number" name='id' value={id} onChange={(e)=>setId(Number(e.target.value))} />
                     </label>
                 </div>
                 <div>
